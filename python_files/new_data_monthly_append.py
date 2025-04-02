@@ -2,7 +2,7 @@ import requests
 import pandas as pd
 from datetime import datetime
 
-API_KEY = "A8DoYbK5bVZ8KKKFnGRftmCKegAg4Jwk"
+API_KEY = "" #use your key
 BASE_URL = "https://api.nytimes.com/svc/archive/v1/{year}/{month}.json?api-key=" + API_KEY
 
 # Get the last month's year and month

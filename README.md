@@ -74,7 +74,7 @@ This script appends the latest one-month data to `nyt_most_popular.csv`.
 
 ### 7️⃣ Run the Dashboard
 ```bash
-streamlit run dashboard/dashboard.py
+streamlit run DashBoard/dashboard.py
 ```
 This will launch a **Streamlit dashboard** in the browser to visualize sentiment trends.
 

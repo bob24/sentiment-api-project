@@ -10,10 +10,10 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 # nltk.download("stopwords")
 
 # Load model & vectorizer
-with open("logistic_regression_model.pkl", "rb") as model_file:
+with open("Artifacts/logistic_regression_model.pkl", "rb") as model_file:
     model = pickle.load(model_file)
 
-with open("tfidf_vectorizer.pkl", "rb") as vec_file:
+with open("Artifacts/tfidf_vectorizer.pkl", "rb") as vec_file:
     vectorizer = pickle.load(vec_file)
 
 # Preprocessing function
@@ -43,5 +43,5 @@ if st.button("Analyze Sentiment"):
 
 # Show existing dataset
 st.write("### Sentiment Analysis on Recent NYT Articles")
-df = pd.read_csv("nyt_articles_with_sentiment.csv")
+df = pd.read_csv("Datasets/nyt_articles_with_sentiment.csv")
 st.dataframe(df[["published_date", "abstract", "predicted_sentiment"]])
