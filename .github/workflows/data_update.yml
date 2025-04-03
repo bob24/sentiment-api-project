@@ -25,28 +25,14 @@ jobs:
       - name: Run Data Fetch Script
         run: python python_files/new_data_monthly_append.py
 
-      - name: Configure Git with PAT
+
+      - name: Commit and Push Changes
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions@github.com"
-          git remote set-url origin https://x-access-token:${{ secrets.GH_PAT }}@github.com/bob24/sentiment-api-project.git
-
-      - name: Create a test update (for debugging)
-        run: |
-          echo "Test update $(date)" >> dummy.txt  # Create a dummy file
-          git add dummy.txt
-          git commit -m "Testing CI/CD - $(date)"
-          git push origin main  # This will now use the PAT token
-
-      - name: Check for changes and commit if needed
-        run: |
-          git status
-          if [[ -n $(git status --porcelain) ]]; then
-            echo "✅ Changes detected, committing and pushing..."
-            git add .
-            git commit -m "Automated update: $(date +'%Y-%m-%d %H:%M:%S')"
-            git push origin main
-          else
-            echo "⚠️ No changes to commit. Skipping push."
-            exit 0
-          fi
+          git remote set-url origin https://x-access-token:$GH_TOKEN@github.com/bob24/sentiment-api-project.git
+          git add .
+          git commit -m "Automated update: $(date +'%Y-%m-%d %H:%M:%S')" || echo "No changes to commit"
+          git push origin main
