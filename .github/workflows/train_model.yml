@@ -13,6 +13,8 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GH_PAT }}  # Ensure GitHub token is used
 
       - name: Set Up Python
         uses: actions/setup-python@v3
@@ -34,3 +36,5 @@ jobs:
           git add Artifacts/
           git commit -m "Updated sentiment model"
           git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
