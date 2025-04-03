@@ -25,6 +25,10 @@ This project analyzes the sentiment of the most popular New York Times articles 
 │   ├── new_data_monthly_append.py  # Appends latest data
 │   ├── predict.py  # Predicts sentiment for articles
 │   ├── train.py  # Trains Logistic Regression model
+│
+├── .github/workflows
+│   ├── data_update.yml  # Automates monthly data update
+│   ├── train_model.yml  # Automates model retraining
 ```
 
 ## 🛠 Installation & Setup
@@ -78,11 +82,21 @@ streamlit run DashBoard/dashboard.py
 ```
 This will launch a **Streamlit dashboard** in the browser to visualize sentiment trends.
 
+### 8️⃣ CI/CD Automation
+- **Automated Data Updates:** GitHub Actions workflow (`.github/workflows/data_update.yml`) runs monthly to fetch and append new NYT data.
+- **Automated Model Retraining:** GitHub Actions workflow (`.github/workflows/train_model.yml`) retrains the model with the latest data.
+
+### 9️⃣ Live Demo
+The app is deployed on **Streamlit Cloud** and accessible at:
+🔗 [NYT Sentiment Analysis Dashboard](https://sentiment-api-project-udyi9crqmnmb4mbf8w78os.streamlit.app/#predicted-sentiment-negative)
+
 ## 📌 Key Features
 ✅ Fetches real-world news data from **NYT API**
 ✅ Applies **Logistic Regression** for sentiment classification
 ✅ **Automated monthly updates** for long-term analysis
 ✅ Interactive **Streamlit Dashboard** for visualization
+✅ **CI/CD pipelines** for data updates & model retraining
+✅ **Deployed on Streamlit Cloud** for easy access
 
 ## 🤝 Contributing
 Feel free to fork the repo, create issues, and submit pull requests!
@@ -92,3 +106,4 @@ This project is licensed under the MIT License.
 
 ---
 _🚀 Happy Coding!_
+
