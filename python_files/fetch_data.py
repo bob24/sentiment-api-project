@@ -7,6 +7,7 @@ BASE_URL = "https://api.nytimes.com/svc/archive/v1/{year}/{month}.json?api-key="
 
 # Get today's date and calculate the last 12 months
 end_date = datetime.today()
+# end_date = end_date - timedelta(days=30) #TODO: remove this after testing
 start_date = end_date - timedelta(days=365)
 
 print(f'start_data: {start_date}, end_data: {end_date}')
