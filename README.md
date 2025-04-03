@@ -34,8 +34,8 @@ This project analyzes the sentiment of the most popular New York Times articles 
 ## 🛠 Installation & Setup
 ### 1️⃣ Clone the Repository
 ```bash
-git clone https://github.com/YOUR_GITHUB_USERNAME/your-repo-name.git
-cd your-repo-name
+git clone https://github.com/bob24/sentiment-api-project.git
+cd sentiment-api-project
 ```
 
 ### 2️⃣ Create and Activate Conda Environment
