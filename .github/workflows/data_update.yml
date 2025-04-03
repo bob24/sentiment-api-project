@@ -6,30 +6,29 @@ on:
   workflow_dispatch:  # Allows manual trigger
 
 jobs:
-  update_data:
+  update-data:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
-
-      - name: Set Up Python
-        uses: actions/setup-python@v3
+        uses: actions/checkout@v4
         with:
-          python-version: "3.9"
+          token: ${{ secrets.GITHUB_TOKEN }}  # Ensure GitHub token is used
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
 
       - name: Install Dependencies
-        run: |
-          pip install -r envs/requirements.txt
+        run: pip install -r envs/requirements.txt
 
-      - name: Fetch & Append New Data
-        run: |
-          python python_files/new_data_monthly_append.py
+      - name: Run Data Fetch Script
+        run: python python_files/fetch_data.py
 
-      - name: Commit and Push New Data
+      - name: Commit and Push Changes
         run: |
-          git config --global user.name "github-actions"
+          git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions@github.com"
           git add datasets/
-          git commit -m "Updated dataset with latest NYT data"
-          git push
+          git commit -m "Updated dataset (automated)"
+          git push origin main  # Ensure branch name is correct
