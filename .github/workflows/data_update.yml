@@ -25,18 +25,18 @@ jobs:
       - name: Run Data Fetch Script
         run: python python_files/new_data_monthly_append.py
 
-      - name: Configure Git
+      - name: Configure Git with PAT
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions@github.com"
-
+          git remote set-url origin https://x-access-token:${{ secrets.GH_PAT }}@github.com/bob24/sentiment-api-project.git
 
       - name: Create a test update (for debugging)
         run: |
           echo "Test update $(date)" >> dummy.txt  # Create a dummy file
           git add dummy.txt
           git commit -m "Testing CI/CD - $(date)"
-          git push origin main
+          git push origin main  # This will now use the PAT token
 
       - name: Check for changes and commit if needed
         run: |
