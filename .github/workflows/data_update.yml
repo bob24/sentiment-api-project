@@ -25,10 +25,20 @@ jobs:
       - name: Run Data Fetch Script
         run: python python_files/new_data_monthly_append.py
 
-      - name: Commit and Push Changes
+      - name: Configure Git
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions@github.com"
-          git add Datasets/
-          git commit -m "Updated dataset (automated)"
-          git push origin main  # Ensure branch name is correct
+
+      - name: Check for changes and commit if needed
+        run: |
+          git status
+          if [[ -n $(git status --porcelain) ]]; then
+            echo "✅ Changes detected, committing and pushing..."
+            git add .
+            git commit -m "Automated update: $(date +'%Y-%m-%d %H:%M:%S')"
+            git push origin main
+          else
+            echo "⚠️ No changes to commit. Skipping push."
+            exit 0
+          fi
