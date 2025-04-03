@@ -23,7 +23,7 @@ jobs:
         run: pip install -r envs/requirements.txt
 
       - name: Run Data Fetch Script
-        run: python python_files/new_data_monthly_append.py
+        run: python python_files/fetch_data.py
 
       - name: Commit and Push Changes
         env:
