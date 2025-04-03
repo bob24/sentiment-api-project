@@ -1,0 +1,36 @@
+name: Retrain Model on New Data
+
+on:
+  push:
+    paths:
+      - "datasets/*"  # Run when dataset changes
+  workflow_dispatch:  # Manual trigger
+
+jobs:
+  train_model:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set Up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.9"
+
+      - name: Install Dependencies
+        run: |
+          pip install -r envs/requirements.txt
+
+      - name: Train Model
+        run: |
+          python python_files/train.py
+
+      - name: Save Model Artifacts
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add Artifacts/
+          git commit -m "Updated sentiment model"
+          git push

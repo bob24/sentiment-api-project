@@ -1,0 +1,35 @@
+name: Update Data Monthly
+
+on:
+  schedule:
+    - cron: "0 0 1 * *"  # Runs on the 1st of every month
+  workflow_dispatch:  # Allows manual trigger
+
+jobs:
+  update_data:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set Up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.9"
+
+      - name: Install Dependencies
+        run: |
+          pip install -r envs/requirements.txt
+
+      - name: Fetch & Append New Data
+        run: |
+          python python_files/new_data_monthly_append.py
+
+      - name: Commit and Push New Data
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add datasets/
+          git commit -m "Updated dataset with latest NYT data"
+          git push
