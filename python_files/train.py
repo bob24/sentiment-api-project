@@ -8,6 +8,9 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import Pipeline
 import pickle
 
+import nltk
+nltk.download('stopwords')
+
 # Load the NYT articles dataset
 df = pd.read_csv("Datasets/nyt_articles.csv")
 

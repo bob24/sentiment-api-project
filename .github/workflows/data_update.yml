@@ -30,6 +30,14 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions@github.com"
 
+
+      - name: Create a test update (for debugging)
+        run: |
+          echo "Test update $(date)" >> dummy.txt  # Create a dummy file
+          git add dummy.txt
+          git commit -m "Testing CI/CD - $(date)"
+          git push origin main
+
       - name: Check for changes and commit if needed
         run: |
           git status
