@@ -5,9 +5,27 @@ import re
 import nltk
 from nltk.corpus import stopwords
 from sklearn.feature_extraction.text import TfidfVectorizer
+import os
 
-# # Download stopwords
-# nltk.download("stopwords")
+# Download stopwords
+nltk.download("stopwords")
+
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+MODEL_PATH = os.path.join(BASE_DIR, "Artifacts/logistic_regression_model.pkl")
+VECTORIZER_PATH = os.path.join(BASE_DIR, "Artifacts/tfidf_vectorizer.pkl")
+DATA_PATH = os.path.join(BASE_DIR, "Datasets/nyt_articles_with_sentiment.csv")
+
+# Load model & vectorizer
+with open(MODEL_PATH, "rb") as model_file:
+    model = pickle.load(model_file)
+
+with open(VECTORIZER_PATH, "rb") as vec_file:
+    vectorizer = pickle.load(vec_file)
+
+# Load dataset
+df = pd.read_csv(DATA_PATH)
 
 # Load model & vectorizer
 with open("Artifacts/logistic_regression_model.pkl", "rb") as model_file:
