@@ -62,4 +62,5 @@ if st.button("Analyze Sentiment"):
 # Show existing dataset
 st.write("### Sentiment Analysis on Recent NYT Articles")
 df = pd.read_csv("Datasets/nyt_articles_with_sentiment.csv")
+df = df.head(5)
 st.dataframe(df[["published_date", "abstract", "predicted_sentiment"]])
