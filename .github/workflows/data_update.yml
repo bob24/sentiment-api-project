@@ -25,14 +25,13 @@ jobs:
       - name: Run Data Fetch Script
         run: python python_files/new_data_monthly_append.py
 
-
       - name: Commit and Push Changes
         env:
           GH_TOKEN: ${{ secrets.GH_PAT }}
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions@github.com"
-          git remote set-url origin https://x-access-token:$GH_TOKEN@github.com/bob24/sentiment-api-project.git
+          git remote set-url origin https://x-access-token:${GH_TOKEN}@github.com/bob24/sentiment-api-project.git
           git add .
-          git commit -m "Automated update: $(date +'%Y-%m-%d %H:%M:%S')" || echo "No changes to commit"
+          git commit -m "Automated update: $(date +'%Y-%m-%d %H:%M:%S')" || exit 0  # Avoid errors if no changes
           git push origin main
