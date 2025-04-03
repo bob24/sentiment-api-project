@@ -14,7 +14,7 @@ print(f'start_data: {start_date}, end_data: {end_date}')
 all_articles = []
 
 # Loop through each month
-for i in range(3):
+for i in range(12):
     year = start_date.year
     month = start_date.month
     api_url = BASE_URL.format(year=year, month=month)
