@@ -3,7 +3,7 @@ name: Retrain Model on New Data
 on:
   push:
     paths:
-      - "datasets/*"  # Run when dataset changes
+      - "Datasets/*"  # Run when dataset changes
   workflow_dispatch:  # Manual trigger
 
 jobs:
