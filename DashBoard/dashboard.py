@@ -62,5 +62,6 @@ if st.button("Analyze Sentiment"):
 # Show existing dataset
 st.write("### Sentiment Analysis on Recent NYT Articles")
 df = pd.read_csv("Datasets/nyt_articles_with_sentiment.csv")
-df = df.head(5)
-st.dataframe(df[["published_date", "abstract", "predicted_sentiment"]])
+df = df.sort_values(by='published_date', ascending=False)  # Sort by date descending
+df_filtered = df.groupby('predicted_sentiment').head(6)  # Get first 6 reviews per sentiment category
+st.dataframe(df_filtered[["published_date", "abstract", "predicted_sentiment"]])
